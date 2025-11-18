@@ -1,29 +1,13 @@
-from typing import List, Optional
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
+from dotenv import load_dotenv
+from fastapi import FastAPI
+from src.routers.test import test_router
 
-app = FastAPI()
+load_dotenv()
 
-
-class Patient(BaseModel):
-    id: int
-    name: str
-    email: Optional[str] = None
+app = FastAPI(title="FastAPI Gemini API")
+app.include_router(test_router)
 
 
-# Simulated in-memory database
-patients_db: List[Patient] = []
-
-
-@app.post("/patients/", response_model=Patient)
-def create_patient(patient: Patient):
-    for existing_patient in patients_db:
-        if existing_patient.id == patient.id:
-            raise HTTPException(status_code=400, detail="ID already exists")
-    patients_db.append(patient)
-    return patient
-
-
-@app.get("/patients/", response_model=List[Patient])
-def get_all_patients():
-    return patients_db
+@app.get("/")
+def get_root():
+    return {"message": "FastAPI Gemini API - Checkout the swagger docs at /docs"}
