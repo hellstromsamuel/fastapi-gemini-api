@@ -41,7 +41,7 @@ docker build -t fastapi-gemini-api .
 ### Run the Docker Container
 
 ```bash
-docker build -t fastapi-gemini-api .
+docker run -d -p 8000:8000 fastapi-gemini-api
 ```
 
 ### Stopping the Container
