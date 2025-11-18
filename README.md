@@ -1,8 +1,9 @@
 # FastAPI Gemini API
 
-## Setup guide
+## Helpful examples
 
-https://medium.com/@ddias.olv/introduction-to-fastapi-with-poetry-a-practical-guide-to-creating-a-complete-api-very-simply-e736e8691010
+- https://medium.com/@ddias.olv/introduction-to-fastapi-with-poetry-a-practical-guide-to-creating-a-complete-api-very-simply-e736e8691010
+- https://www.philschmid.de/gemini-file-search-javascript
 
 ## Install poetry
 
