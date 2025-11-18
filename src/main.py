@@ -1,11 +1,26 @@
+import os
 from dotenv import load_dotenv
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI, HTTPException
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from src.routers.test import test_router
+from src.routers.file_search_store import file_search_store_router
 
 load_dotenv()
 
+
+def verify_token(credentials: HTTPAuthorizationCredentials = Depends(HTTPBearer())):
+    token = credentials.credentials
+    if token != os.getenv("API_SECRET"):
+        raise HTTPException(status_code=401, detail="Unauthorized")
+
+
 app = FastAPI(title="FastAPI Gemini API")
-app.include_router(test_router)
+app.include_router(
+    file_search_store_router,
+    dependencies=[Depends(verify_token)])
+app.include_router(
+    test_router,
+    dependencies=[Depends(verify_token)])
 
 
 @app.get("/")
