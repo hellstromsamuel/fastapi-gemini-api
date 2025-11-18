@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from fastapi import Depends, FastAPI, HTTPException
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-from src.routers.test import test_router
+from src.routers.root import root_router
 from src.routers.file_search_store import file_search_store_router
 
 load_dotenv()
@@ -19,10 +19,5 @@ app.include_router(
     file_search_store_router,
     dependencies=[Depends(verify_token)])
 app.include_router(
-    test_router,
+    root_router,
     dependencies=[Depends(verify_token)])
-
-
-@app.get("/")
-def get_root():
-    return {"message": "FastAPI Gemini API - Checkout the swagger docs at /docs"}
