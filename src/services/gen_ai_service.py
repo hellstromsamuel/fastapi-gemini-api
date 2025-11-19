@@ -6,7 +6,7 @@ from src.models.generate_content import GenerateContentResponse
 class GenAiService():
     def __init__(self, gemini_api_key: str):
         self.client = genai.Client(api_key=gemini_api_key)
-        self.model = "gemini-2.5-flash-lite"
+        self.model = "gemini-2.5-flash"
 
     def generate_content(self, query: str, file_search_store_name: str = None) -> GenerateContentResponse:
         system_instruction = ""
