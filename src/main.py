@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from fastapi import Depends, FastAPI, HTTPException
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-from src.routers.root import root_router
+from src.routers._root import root_router
 from src.routers.file_search_store import file_search_store_router
 
 load_dotenv()
