@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from fastapi import Depends, FastAPI, HTTPException
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from src.routers._root import root_router
+from src.routers.agents import agents_router
 from src.routers.file_search_store import file_search_store_router
 
 load_dotenv()
@@ -20,4 +21,7 @@ app.include_router(
     dependencies=[Depends(verify_token)])
 app.include_router(
     root_router,
+    dependencies=[Depends(verify_token)])
+app.include_router(
+    agents_router,
     dependencies=[Depends(verify_token)])
