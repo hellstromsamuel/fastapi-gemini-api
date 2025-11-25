@@ -1,5 +1,5 @@
 from google import genai
-from google.genai import types
+from google.genai.types import Content, GenerateContentConfig, Tool
 
 from src.models.generate_content import GenerateContentResponse
 
@@ -8,30 +8,23 @@ class GenAiService():
     def __init__(self, gemini_api_key: str):
         self.client = genai.Client(api_key=gemini_api_key)
         self.model = "gemini-2.5-flash"
-        self.description = "Answer questions based on information from tools provided."
-        self.system_instruction = """
-            Never make up your own information or assumptions.
-            Always answer consise and to the point.
-            If you don't have the required information, you must respond 'I don't know'.
-            """
 
-    def generate_content(self, query: str, file_search_store_name: str) -> GenerateContentResponse:
-        tools = [
-            types.Tool(
-                file_search=types.FileSearch(
-                    file_search_store_names=[file_search_store_name]
-                )
-            )
-        ]
-
-        config = types.GenerateContentConfig(
-            system_instruction=self.system_instruction,
-            tools=tools
+    def generate_content(
+        self,
+        system_instruction: str,
+        contents: list[Content],
+        tools: list[Tool],
+        temperature: float = 1.0
+    ) -> GenerateContentResponse:
+        config = GenerateContentConfig(
+            system_instruction=system_instruction,
+            tools=tools,
+            temperature=temperature
         )
 
         response = self.client.models.generate_content(
             model=self.model,
-            contents=query,
+            contents=contents,
             config=config
         )
 
