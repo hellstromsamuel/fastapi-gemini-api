@@ -3,12 +3,12 @@ name = "fastapi-gemini-api"
 version = "0.1.0"
 description = ""
 authors = [
-    {name = "Samuel Hellstrøm",email = "samuel.hellstrom@netlight.com"}
+    {name = "Samuel Hellstrøm",email = "hellstromsamuel@gmail.com"}
 ]
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.11,<4.0"
 dependencies = [
-    "fastapi (>=0.121.2,<0.122.0)",
+    "fastapi (>=0.115.0,<0.119.0)",
     "uvicorn (>=0.38.0,<0.39.0)",
     "google (>=3.0.0,<4.0.0)",
     "google-genai (>=1.51.0,<2.0.0)",
@@ -17,7 +17,7 @@ dependencies = [
 ]
 
 [tool.poetry]
-packages = [{include = "fastapi_gemini_api", from = "src"}]
+packages = [{include = "*", from = "src"}]
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
