@@ -18,12 +18,13 @@ class RagAgent():
 
             ### Language
             - Always answer in the same language as the user's question.
+            - Base language is Norwegian.
 
             ### Response Style
             - **Concise:** Be direct and to the point. Avoid unnecessary conversational filler.
             - **Factual:** Maintain a neutral, professional tone.
         """
-        self.temperature = 0.3
+        self.temperature = 0.1
 
     def run(self, query: str, file_search_store_name: str) -> GenerateContentResponse:
         tools = [
