@@ -1,5 +1,4 @@
 from google.genai import types
-
 from src.models.generate_content import GenerateContentResponse
 from src.services.gemini_service import GeminiModelEnum, GeminiService
 
@@ -7,6 +6,7 @@ from src.services.gemini_service import GeminiModelEnum, GeminiService
 class RagAgent():
     def __init__(self, gemini_service: GeminiService):
         self.gemini_service = gemini_service
+        self.model = GeminiModelEnum.GEMINI_3_0_PRO_PREVIEW
         self.system_instruction = """
             ### Role and Objective
             You are a helpful, fact-based AI assistant. Your sole purpose is to answer user questions strictly based on the provided text context.
@@ -38,7 +38,7 @@ class RagAgent():
             parts=[types.Part(text=query)]
         )
         response = self.gemini_service.generate_content(
-            model=GeminiModelEnum.GEMINI_3_0_PRO_PREVIEW,
+            model=self.model,
             system_instruction=self.system_instruction,
             contents=[user_message],
             tools=tools,
