@@ -1,16 +1,22 @@
+from enum import Enum
 from google import genai
 from google.genai.types import Content, GenerateContentConfig, Tool
-
 from src.models.generate_content import GenerateContentResponse
 
 
-class GenAiService():
+class GeminiModelEnum(str, Enum):
+    GEMINI_3_0_PRO_PREVIEW = "gemini-3.0-pro-preview"
+    GEMINI_2_5_FLASH = "gemini-2.5-flash"
+    GEMINI_2_5_FLASH_LITE = "gemini-2.5-flash-lite"
+
+
+class GeminiService():
     def __init__(self, gemini_api_key: str):
         self.client = genai.Client(api_key=gemini_api_key)
-        self.model = "gemini-2.5-flash"
 
     def generate_content(
         self,
+        model: GeminiModelEnum,
         system_instruction: str,
         contents: list[Content],
         tools: list[Tool],
@@ -23,7 +29,7 @@ class GenAiService():
         )
 
         response = self.client.models.generate_content(
-            model=self.model,
+            model=model.value,
             contents=contents,
             config=config
         )
