@@ -6,7 +6,7 @@ from src.services.gemini_service import GeminiModelEnum, GeminiService
 class RagAgent():
     def __init__(self, gemini_service: GeminiService):
         self.gemini_service = gemini_service
-        self.model = GeminiModelEnum.GEMINI_3_0_PRO_PREVIEW
+        self.model = GeminiModelEnum.GEMINI_2_5_FLASH_LITE
         self.system_instruction = """
             ### Role and Objective
             You are a helpful, fact-based AI assistant. Your sole purpose is to answer user questions strictly based on the provided text context.
